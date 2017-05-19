@@ -10,8 +10,8 @@ MAINTAINER Rithu John <rithu.john@coreos.com>
 #
 # OpenSSL is required so wget can query HTTPS endpoints for health checking.
 RUN apk add --update ca-certificates openssl
-
-COPY _output/bin/dex /usr/local/bin/dex
+RUN apk add --no-cache --update alpine-sdk && make release-binary
+RUN cp /go/bin/dex /usr/local/bin/dex
 
 # Import frontend assets and set the correct CWD directory so the assets
 # are in the default path.
